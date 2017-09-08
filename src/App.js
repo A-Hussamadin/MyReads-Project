@@ -24,7 +24,7 @@ getAllBooks=() => {
     })
   }
 
-updateShelf(book, shelf) {
+updateShelf = (book, shelf) =>{
    
     BooksAPI.update(book, shelf).then((res) => {
         this.getAllBooks();
