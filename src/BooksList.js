@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Shelf from './Shelf';
-
+import { Link } from 'react-router-dom';
 class BooksList extends Component{
     render(){
       
@@ -10,7 +10,7 @@ class BooksList extends Component{
 
    
         return (
-         
+          
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -49,7 +49,7 @@ class BooksList extends Component{
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.props.onSearchClick()}>Add a book</a>
+              <Link to='/search'>Add a book</Link>
             </div>
           </div>
         )
