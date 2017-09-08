@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class BooksShelf extends Component{
+class Shelf extends Component{
 
  
   
@@ -10,7 +10,7 @@ class BooksShelf extends Component{
       
       let shelfBooks;
 
-      const { type , books  } = this.props;
+      const { type ,books  } = this.props;
      
 
       
@@ -49,4 +49,4 @@ class BooksShelf extends Component{
     }
 }
 
-export default BooksShelf;
+export default Shelf;
