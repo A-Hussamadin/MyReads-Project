@@ -1,32 +1,34 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 
-class Shelf extends Component{
+class Book extends Component{
 
- 
-  
-  
+state={
+    shelf:this.props.book.shelf,
+}
+
+
+
+handleUpdating = (evt,book)=>{
+    this.props.onUpdateShelf(book, evt.target.value);
+    this.setState({shelf: evt.target.value});
+}
+
+// checkShelfIfNotIncluded = (bookID)=>{
+   
+//   this.setState({shelf: this.props.onCheckBookShelf(bookID)})
+// }
+
+    
     render(){
-      
-      let shelfBooks;
-
-      const { type ,books  } = this.props;
-     
-
-      
-      shelfBooks = books.filter((book) => book.shelf === type);
+        const { book }  = this.props;
 
         return (
-         
-           <ol className="books-grid">
-             {
-              shelfBooks.map((book)=>(
-                <li key={book.id} >
                 <div className="book">
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage : `url(${book.imageLinks.thumbnail})` }}></div>
                     <div className="book-shelf-changer">
-                      <select defaultValue={book.shelf} onChange={(e) => this.props.onUpdateShelf(book, e.target.value)}>
+                      <select defaultValue={this.state.shelf} onChange={(evt) => this.handleUpdating(evt, book)}>
                         <option value="none" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
@@ -38,15 +40,10 @@ class Shelf extends Component{
                   <div className="book-title">{book.title}</div>
                   <div className="book-authors">{book.authors}</div>
                 </div>
-              </li>
-               ))
-             }
-               
-              
-            </ol>
 
         )
     }
 }
 
-export default Shelf;
+
+export default Book;

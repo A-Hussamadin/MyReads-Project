@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Shelf from './Shelf';
 import { Link } from 'react-router-dom';
+import Book from './Book';
 class BooksList extends Component{
     render(){
       
@@ -8,6 +8,10 @@ class BooksList extends Component{
 
       const {  books  } = this.props;
 
+
+     let currentlyReadingBooks =  books.filter((book) => book.shelf === 'currentlyReading');
+     let wantToReadBooks  =  books.filter((book) => book.shelf === 'wantToRead');
+     let readBooks  = books.filter((book) => book.shelf === 'read');
    
         return (
           
@@ -20,30 +24,53 @@ class BooksList extends Component{
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
-                  <Shelf type={'currentlyReading'}
-                   books={books}
-                   onUpdateShelf={this.props.updateShelf}
-                   />
+                  <ol className="books-grid">
+                  {
+                    currentlyReadingBooks.map((book)=>(
+                <li key={book.id} >
+                <Book book={book}
+                onUpdateShelf={this.props.updateShelf}
+                onCheckBookShelf={this.props.checkBookShelf}
+                />
+                </li>
+               ))
+             }
+                   </ol>
                   </div>
+                  
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
-                  <Shelf 
-                  type={'wantToRead'}
-                  books={books}
-                  onUpdateShelf={this.props.updateShelf}
-                  />
+                  <ol className="books-grid">
+                  {
+                    wantToReadBooks.map((book)=>(
+                <li key={book.id} >
+                <Book book={book}
+                onUpdateShelf={this.props.updateShelf}
+                onCheckBookShelf={this.props.checkBookShelf}
+                />
+                </li>
+               ))
+             }
+                   </ol>
                   </div>
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
-                  <Shelf 
-                  type={'read'}
-                  books={books}
-                  onUpdateShelf={this.props.updateShelf}
-                  />
+                  <ol className="books-grid">
+                  {
+                    readBooks.map((book)=>(
+                <li key={book.id} >
+                <Book book={book}
+                onUpdateShelf={this.props.updateShelf}
+                onCheckBookShelf={this.props.checkBookShelf}
+                />
+                </li>
+               ))
+             }
+                   </ol>
                   </div>
                 </div>
               </div>
