@@ -6,66 +6,66 @@ import BooksList from './BooksList';
 import SearchPage from './SearchPage';
 class BooksApp extends React.Component {
   state = {
-    books :  [],
+    books: [],
     searchedBooks: [],
-  
+
     showSearchPage: false
   }
 
   componentDidMount() {
     this.getAllBooks();
-    
-}
 
-getAllBooks=() => {
+  }
+
+  getAllBooks = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
 
-updateShelf = (book, shelf) =>{
-   
+  updateShelf = (book, shelf) => {
+
     BooksAPI.update(book, shelf).then((res) => {
-        this.getAllBooks();
+      this.getAllBooks();
     })
-    
+
 
   }
 
 
-  showSearchPage =()=> {
+  showSearchPage = () => {
     this.setState({ showSearchPage: true })
   }
 
-  checkBookShelf=(bookID)=>{
-   let b = this.state.books.find((book)=>{
+  checkBookShelf = (bookID) => {
+    let b = this.state.books.find((book) => {
       return book.id === bookID
     });
 
     if (b)
       return b.shelf;
-    else 
+    else
       return 'none';
-    
-    
+
+
   }
   render() {
     return (
       <div className="app">
-          <Route path='/search' render={()=>(
-            <SearchPage
-              userBooks={this.state.books}
-              updateShelf={this.updateShelf}
-              checkBookShelf={this.checkBookShelf}
-            />
-          )}/>
+        <Route path='/search' render={() => (
+          <SearchPage
+            userBooks={this.state.books}
+            updateShelf={this.updateShelf}
+            checkBookShelf={this.checkBookShelf}
+          />
+        )} />
 
-          
-          <Route  exact path='/' render={() =>(
-            <BooksList 
+
+        <Route exact path='/' render={() => (
+          <BooksList
             books={this.state.books}
             updateShelf={this.updateShelf}
-            />
+          />
         )} />
       </div>
     )
