@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Book from './Book';
+
 class BooksList extends Component{
     render(){
       
-     
-
-      const {  books  } = this.props;
+     const {  books  } = this.props;
 
 
      let currentlyReadingBooks =  books.filter((book) => book.shelf === 'currentlyReading');
@@ -30,7 +29,6 @@ class BooksList extends Component{
                 <li key={book.id} >
                 <Book book={book}
                 onUpdateShelf={this.props.updateShelf}
-                onCheckBookShelf={this.props.checkBookShelf}
                 />
                 </li>
                ))
@@ -48,7 +46,6 @@ class BooksList extends Component{
                 <li key={book.id} >
                 <Book book={book}
                 onUpdateShelf={this.props.updateShelf}
-                onCheckBookShelf={this.props.checkBookShelf}
                 />
                 </li>
                ))
@@ -65,7 +62,6 @@ class BooksList extends Component{
                 <li key={book.id} >
                 <Book book={book}
                 onUpdateShelf={this.props.updateShelf}
-                onCheckBookShelf={this.props.checkBookShelf}
                 />
                 </li>
                ))

@@ -12,16 +12,32 @@ class SearchPage extends Component {
 
     updateQuery = (query)=>{
         this.setState({query : query.trim()})
-        let maxResults = 10;
+        let maxResults = 20;
         BooksAPI.search(query, maxResults).then((books)=>{
-          
-          this.setState({books})
+          this.addShelfToSearchedBooks(books);
+          this.setState({books});
         })
 
     }
+
+
+    addShelfToSearchedBooks = (searchedBooks)=>{
+      searchedBooks.forEach((book)=>{
+        let ub = this.props.userBooks.find((userBook)=>{
+           return userBook.id === book.id;
+        });
+     
+        if(ub){
+           book.shelf = ub.shelf;
+        }else{
+          book.shelf='none';
+        }
+      })
+    }
+
+   
     
     render(){
-      console.log(this.state.books);
         return (
           
             <div className="search-books">
@@ -43,11 +59,10 @@ class SearchPage extends Component {
             { this.state.books.length > 0  && (
              
               
-              this.state.books.map((book)=>(
+            this.state.books.map((book)=>(
             <li key={book.id} >
             <Book book={book}
             onUpdateShelf={this.props.updateShelf}
-                onCheckBookShelf={this.props.checkBookShelf}
             />
             </li>
            ))

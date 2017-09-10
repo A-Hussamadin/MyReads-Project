@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 
-
 class Book extends Component{
 
 state={
     shelf:this.props.book.shelf,
 }
-
-
 
 handleUpdating = (evt,book)=>{
     this.props.onUpdateShelf(book, evt.target.value);
